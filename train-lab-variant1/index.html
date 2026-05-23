@@ -36,7 +36,25 @@
         </div>
     </div>
 </div></header><main><section class="section reveal"><div class="wrap"><div class="kicker">Mission</div><h2>AI systems that can reason, adapt, and remain reliable in the real world.</h2><p class="sub">Our work blends theory, systems, and interdisciplinary insights, from explainable AI, neuroscience-inspired modeling, game theory, and Bayesian inference to real-world network deployment challenges.</p><div class="grid"><div class="card hover-lift"><img src="assets/semantic_comm.png" class="card-img" alt="Semantic Communication Application"><h3>Semantic Communication</h3><p>Communication systems that convey meaning and task-relevant information rather than only raw bits.</p></div><div class="card hover-lift"><img src="assets/foundation_models.png" class="card-img" alt="Foundation Models Application"><h3>Foundation Models for Networks</h3><p>AI-native network intelligence using large-scale models for reasoning, adaptation, and control.</p></div><div class="card hover-lift"><img src="assets/math_ai.png" class="card-img" alt="Mathematical Foundations Diagram"><h3>Mathematical Foundations of AI</h3><p>Principled tools for trustworthy, generalizable, and interpretable AI systems.</p></div><div class="card hover-lift"><img src="assets/integrated_sensing.png" class="card-img" alt="Integrated Sensing Application"><h3>Integrated Sensing & Communication</h3><p>Joint sensing, communication, computation, and control for next-generation wireless systems.</p></div></div></div></section>
-<section id="news" class="section alt reveal"><div class="wrap two"><div><div class="kicker">News</div><h2>Latest Updates from TRAIN Lab</h2><p class="sub">Recent announcements, publications, and media features.</p></div><div class="timeline">
+<section id="news" class="section alt reveal">
+<style>
+#news .timeline {
+    display: block;
+    column-count: 2;
+    column-gap: 24px;
+    margin-top: 40px;
+}
+#news .item {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+}
+@media (max-width: 768px) {
+    #news .timeline { column-count: 1; }
+}
+</style>
+<div class="wrap"><div style="text-align: center; margin-bottom: 40px;"><div class="kicker">News</div><h2>Latest Updates from TRAIN Lab</h2><p class="sub" style="margin: 0 auto;">Recent announcements, publications, and media features.</p></div><div class="timeline">
     <div class="item">
         <div class="date">May 2026</div>
         <div>

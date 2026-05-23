@@ -12,7 +12,7 @@ const navbarHtml = `
             <li><a href="publications.html">Publications</a></li>
             <li><a href="openings.html">Openings</a></li>
             <li><a href="awards.html">Awards</a></li>
-            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="index.html#news">News</a></li>
             <li><a href="contact.html" class="btn btn-sm btn-primary" style="color: white;">Contact</a></li>
         </ul>
         <button class="mobile-menu-btn">

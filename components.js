@@ -44,7 +44,7 @@ const footerHtml = `
         </div>
         <div class="footer-contact">
             <h3>Contact Us</h3>
-            <a href="mailto:contact@trainlab.net" class="contact-link"><i data-lucide="mail"></i> contact@trainlab.net</a>
+            <a href="mailto:cthomas2@wpi.edu" class="contact-link"><i data-lucide="mail"></i> cthomas2@wpi.edu</a>
             <p class="contact-desc">Interested in joining the lab or collaborating? Send us an email.</p>
         </div>
     </div>

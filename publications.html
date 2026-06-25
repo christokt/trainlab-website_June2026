@@ -186,20 +186,20 @@
 
     const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+    // Primary link for the title — publisher DOI or arXiv only. Null if neither exists.
     function primaryUrl(p) {
         if (p.doi)   return "https://doi.org/" + p.doi;
         if (p.url)   return p.url;
         if (p.arxiv) return "https://arxiv.org/abs/" + p.arxiv;
-        return "https://scholar.google.com/scholar?q=" + encodeURIComponent(p.t);
+        return null;
     }
 
-    // Returns the list of link "chips" shown under each entry.
+    // Returns the list of link "chips" shown under each entry (empty if no link exists).
     function linkChips(p) {
         const chips = [];
         if (p.doi)   chips.push({href:"https://doi.org/" + p.doi,        icon:"external-link", label:"DOI"});
         if (p.url)   chips.push({href:p.url,                              icon:"file-text",     label:"PDF"});
         if (p.arxiv) chips.push({href:"https://arxiv.org/abs/" + p.arxiv, icon:"file-text",     label:"arXiv"});
-        if (!chips.length) chips.push({href:"https://scholar.google.com/scholar?q=" + encodeURIComponent(p.t), icon:"search", label:"Scholar"});
         return chips;
     }
 
@@ -248,9 +248,12 @@
                 const chips = linkChips(p).map(c =>
                     `<a class="pe-link" href="${c.href}" target="_blank" rel="noopener"><i data-lucide="${c.icon}"></i> ${c.label}</a>`
                 ).join("");
+                const titleHtml = url
+                    ? `<a href="${url}" target="_blank" rel="noopener">${esc(p.t)}</a>`
+                    : esc(p.t);
                 return `
                 <div class="pub-entry">
-                    <div class="pe-title"><a href="${url}" target="_blank" rel="noopener">${esc(p.t)}</a></div>
+                    <div class="pe-title">${titleHtml}</div>
                     <div class="pe-authors">${authorsHtml(p.a)}</div>
                     <div class="pe-venue">${esc(p.v)}, ${p.y}</div>
                     <div class="pe-meta">

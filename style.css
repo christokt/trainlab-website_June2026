@@ -997,3 +997,26 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
     .hg-pulse, .hg-orbit ~ .hg-pulse { display: none; }
 }
+
+/* Mobile hero: stack into one centered column (inline grid style needs overriding) */
+@media (max-width: 920px) {
+    .hero .hero-inner {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+        text-align: center;
+        padding-left: 22px !important;
+        padding-right: 22px !important;
+    }
+    .hero-massive-logo { order: -1; }
+    .hero-massive-logo img { max-width: 230px !important; }
+    .hero .eyebrow { align-self: center !important; }
+    .hero-actions { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+    .hero .h1 { font-size: 32px !important; letter-spacing: -0.8px; }
+    .hero .lead { font-size: 17px !important; }
+    .hero-globe { opacity: 0.22; top: 24%; width: min(280px, 64vw); }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn, .hero-actions .ghost { width: 100%; justify-content: center; }
+}

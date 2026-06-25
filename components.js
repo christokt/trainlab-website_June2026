@@ -58,4 +58,7 @@ const footerHtml = `
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("navbar-placeholder").innerHTML = navbarHtml;
     document.getElementById("footer-placeholder").innerHTML = footerHtml;
+    // Render icons (e.g. the mobile menu hamburger) AFTER the navbar/footer are injected,
+    // otherwise lucide.createIcons() in script.js runs too early and the icons never appear.
+    if (window.lucide) lucide.createIcons();
 });

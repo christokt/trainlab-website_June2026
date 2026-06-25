@@ -46,14 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 navLinks.style.display = 'flex';
                 navLinks.style.flexDirection = 'column';
+                navLinks.style.alignItems = 'flex-start';
+                navLinks.style.gap = '18px';
                 navLinks.style.position = 'absolute';
                 navLinks.style.top = '100%';
                 navLinks.style.left = '0';
                 navLinks.style.right = '0';
-                navLinks.style.background = 'rgba(5, 11, 20, 0.95)';
-                navLinks.style.padding = '20px';
+                navLinks.style.background = 'rgba(255, 255, 255, 0.97)';
+                navLinks.style.padding = '20px 24px';
                 navLinks.style.backdropFilter = 'blur(16px)';
-                navLinks.style.borderBottom = '1px solid rgba(255, 255, 255, 0.08)';
+                navLinks.style.borderBottom = '1px solid var(--glass-border)';
+                navLinks.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.08)';
             }
         });
     }

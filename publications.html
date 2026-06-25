@@ -46,18 +46,19 @@
     <div id="footer-placeholder"></div>
 
     <script>
-    // Publication data — deduplicated from Google Scholar.
+    // Publication data — deduplicated from Google Scholar, DOIs/years verified against DBLP.
     // type: journal | conference | book | chapter | preprint | patent | thesis
+    // Optional links: doi (publisher DOI), arxiv (arXiv id), url (direct link). Falls back to a Scholar search.
     // Edit this array to add/update publications.
     const PUBS = [
         // 2026
         {t:"From Passive Mirrors to Active Agents: Holonic Digital Twins for Physical Artificial Intelligence Over Networks", a:"C. K. Thomas, O. Hashash, W. Saad", v:"IEEE Vehicular Technology Magazine", y:2026, type:"journal"},
         {t:"Vision and Causal Learning Based Channel Estimation for THz Communications", a:"K. Kim, Y. K. Tun, M. S. Munir, C. K. Thomas, W. Saad, C. S. Hong", v:"IEEE Transactions on Mobile Computing", y:2026, type:"journal"},
-        {t:"Joint Beamforming and 3D Location Optimization for Multi-user Holographic UAV Communications", a:"C. K. Sheemar, A. Mahmood, C. K. Thomas, G. C. Alexandropoulos, J. Querol, et al.", v:"IEEE Transactions on Communications", y:2026, type:"journal"},
-        {t:"Multi-mode Index Modulation based on Affine Frequency Division Multiplexing", a:"A. Anoop, C. K. Thomas, S. Kala, J. V. B. Benifa, W. Saad", v:"Physical Communication", y:2026, type:"journal"},
-        {t:"Variational Bayesian Detection for Quantized AFDM Systems", a:"A. Anoop, C. K. Thomas, B. B. JV, S. Kala", v:"IEEE WCNC Workshops (WCNCW)", y:2026, type:"conference"},
-        {t:"Low-Complexity VAMP Detector for Affine Frequency Division Multiplexing Systems", a:"A. Anoop, C. K. Thomas, B. B. JV, S. Kala", v:"IEEE WCNC Workshops (WCNCW)", y:2026, type:"conference"},
-        {t:"Multi-Path Bayesian Inference for Symbol Detection in Affine Frequency Division Multiplexing", a:"A. Anoop, C. K. Thomas, J. V. B. Benifa, S. Kala", v:"National Conference on Communications (NCC)", y:2026, type:"conference"},
+        {t:"Joint Beamforming and 3D Location Optimization for Multi-user Holographic UAV Communications", a:"C. K. Sheemar, A. Mahmood, C. K. Thomas, G. C. Alexandropoulos, J. Querol, et al.", v:"IEEE Transactions on Communications", y:2026, type:"journal", doi:"10.1109/TCOMM.2026.3663285"},
+        {t:"Multi-mode Index Modulation based on Affine Frequency Division Multiplexing", a:"A. Anoop, C. K. Thomas, S. Kala, J. V. B. Benifa, W. Saad", v:"Physical Communication", y:2026, type:"journal", doi:"10.1016/j.phycom.2026.103059"},
+        {t:"Variational Bayesian Detection for Quantized AFDM Systems", a:"A. Anoop, C. K. Thomas, B. B. JV, S. Kala", v:"IEEE WCNC Workshops (WCNCW)", y:2026, type:"conference", doi:"10.1109/WCNCW67598.2026.11555710"},
+        {t:"Low-Complexity VAMP Detector for Affine Frequency Division Multiplexing Systems", a:"A. Anoop, C. K. Thomas, B. B. JV, S. Kala", v:"IEEE WCNC Workshops (WCNCW)", y:2026, type:"conference", doi:"10.1109/WCNCW67598.2026.11555324"},
+        {t:"Multi-Path Bayesian Inference for Symbol Detection in Affine Frequency Division Multiplexing", a:"A. Anoop, C. K. Thomas, J. V. B. Benifa, S. Kala", v:"National Conference on Communications (NCC)", y:2026, type:"conference", doi:"10.1109/NCC68160.2026.11479015"},
         {t:"Toward World Models for Epidemiology", a:"Z. Memon, Y. Su, C. K. Thomas, W. Saad, L. Zhao, N. Ramakrishnan", v:"arXiv preprint", y:2026, type:"preprint", arxiv:"2604.09519"},
         {t:"Disentanglement with Holographic Reduced Representations", a:"J. J. V. Olivera, C. K. Thomas, W. Saad", v:"arXiv preprint", y:2026, type:"preprint", arxiv:"2606.09725"},
         {t:"Resilience Characterization of AI-Native Wireless Receivers via Persistent Homology", a:"C. K. Thomas, E. C. Strinati", v:"arXiv preprint", y:2026, type:"preprint", arxiv:"2605.22886"},
@@ -70,87 +71,88 @@
         {t:"Fundamental Limits of Quantum Semantic Communication via Sheaf Cohomology", a:"C. K. Thomas, M. Chen", v:"arXiv preprint", y:2026, type:"preprint", arxiv:"2601.10958"},
 
         // 2025
-        {t:"Artificial General Intelligence (AGI)-Native Wireless Systems: A Journey Beyond 6G", a:"W. Saad, O. Hashash, C. K. Thomas, C. Chaccour, M. Debbah, N. Mandayam, et al.", v:"Proceedings of the IEEE", y:2025, type:"journal"},
-        {t:"Joint Holographic Beamforming and User Scheduling with Individual QoS Constraints", a:"C. K. Sheemar, C. K. Thomas, G. C. Alexandropoulos, J. Querol, S. Chatzinotas, et al.", v:"IEEE Transactions on Vehicular Technology", y:2025, type:"journal"},
-        {t:"Semantic Communication for the Internet of Sounds: Architecture, Design Principles, and Challenges", a:"C. Liang, Y. Sun, C. K. Thomas, L. Mohjazi, W. Saad", v:"IEEE Wireless Communications", y:2025, type:"journal"},
-        {t:"Toward Heterogeneous Quantum Federated Learning: Challenges and Solutions", a:"R. Rahman, D. C. Nguyen, C. K. Thomas, W. Saad", v:"IEEE Network", y:2025, type:"journal"},
+        {t:"Artificial General Intelligence (AGI)-Native Wireless Systems: A Journey Beyond 6G", a:"W. Saad, O. Hashash, C. K. Thomas, C. Chaccour, M. Debbah, N. Mandayam, et al.", v:"Proceedings of the IEEE", y:2025, type:"journal", doi:"10.1109/JPROC.2025.3526887", arxiv:"2405.02336"},
+        {t:"Joint Holographic Beamforming and User Scheduling with Individual QoS Constraints", a:"C. K. Sheemar, C. K. Thomas, G. C. Alexandropoulos, J. Querol, S. Chatzinotas, et al.", v:"IEEE Transactions on Vehicular Technology", y:2025, type:"journal", doi:"10.1109/TVT.2025.3569401"},
+        {t:"Semantic Communication for the Internet of Sounds: Architecture, Design Principles, and Challenges", a:"C. Liang, Y. Sun, C. K. Thomas, L. Mohjazi, W. Saad", v:"IEEE Wireless Communications", y:2025, type:"journal", doi:"10.1109/MWC.013.2400344"},
+        {t:"Toward Heterogeneous Quantum Federated Learning: Challenges and Solutions", a:"R. Rahman, D. C. Nguyen, C. K. Thomas, W. Saad", v:"IEEE Network", y:2025, type:"journal", arxiv:"2511.22148"},
         {t:"Introduction to Semantic Communications", a:"C. Chaccour, C. K. Thomas, W. Saad, M. Debbah", v:"In: Foundations of Semantic Communication Networks (pp. 1–18)", y:2025, type:"chapter"},
         {t:"Causal Reasoning Foundations of Semantic Communication Systems", a:"C. K. Thomas, C. Chaccour, W. Saad, M. Debbah", v:"In: Foundations of Semantic Communication Networks (pp. 217–240)", y:2025, type:"chapter"},
         {t:"Reasoning Foundations for Generative AI-Based Wireless Networks", a:"C. K. Thomas, O. Hashash, W. Saad", v:"In: GenAI and LLMs for Beyond 5G Networks (pp. 163–183)", y:2025, type:"chapter"},
-        {t:"On the Computing and Communication Tradeoff in Reasoning-Based Multi-user Semantic Communications", a:"N. Singh, C. K. Thomas, W. Saad, E. C. Strinati", v:"IEEE Wireless Communications and Networking Conference (WCNC)", y:2025, type:"conference"},
-        {t:"Wireless Knowledge Grounding in Smaller LLMs Using Retrieval Augmented Generation and Fine-Tuning", a:"A. Neeser, C. K. Thomas, S. Xu, N. Ramakrishnan, W. Saad", v:"IEEE International Conference on Communications (ICC)", y:2025, type:"conference"},
-        {t:"Reconciling AMP Algorithms Derived from Belief Propagation or the Large System Limit Bethe Free Energy", a:"Z. Zhao, F. Xiao, C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2025, type:"conference"},
+        {t:"On the Computing and Communication Tradeoff in Reasoning-Based Multi-user Semantic Communications", a:"N. Singh, C. K. Thomas, W. Saad, E. C. Strinati", v:"IEEE Wireless Communications and Networking Conference (WCNC)", y:2025, type:"conference", doi:"10.1109/WCNC61545.2025.10978707", arxiv:"2406.15199"},
+        {t:"Wireless Knowledge Grounding in Smaller LLMs Using Retrieval Augmented Generation and Fine-Tuning", a:"A. Neeser, C. K. Thomas, S. Xu, N. Ramakrishnan, W. Saad", v:"IEEE International Conference on Communications (ICC)", y:2025, type:"conference", doi:"10.1109/ICC52391.2025.11160863"},
+        {t:"Reconciling AMP Algorithms Derived from Belief Propagation or the Large System Limit Bethe Free Energy", a:"Z. Zhao, F. Xiao, C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2025, type:"conference", doi:"10.1109/ICASSP49660.2025.10889454"},
         {t:"Affine Frequency Division Multiplexing with Quadrature Index Modulation", a:"A. Anoop, C. K. Thomas, S. Kala", v:"Emerging Technologies for Intelligent Systems (ETIS)", y:2025, type:"conference"},
         {t:"Variational Bayesian Detection for Sparse AFDM-IM in High-Doppler Wireless Channels", a:"A. Anoop, C. K. Thomas, J. V. B. Benifa, S. Kala", v:"International Conference on Networks & Advances in Computational Technologies", y:2025, type:"conference"},
         {t:"Greedy User Scheduling and Beamforming for Holographic Communications", a:"C. K. Sheemar, C. K. Thomas, W. U. Khan, G. C. Alexandropoulos, J. Querol, et al.", v:"IEEE International Mediterranean Conference on Communications and Networking (MeditCom)", y:2025, type:"conference"},
         {t:"Affine Frequency Division Multiplexing With Generalized Index Modulation", a:"A. Anoop, C. K. Thomas, J. V. B. Benifa, S. Kala", v:"International Conference on Smart Computing and Communications", y:2025, type:"conference"},
         {t:"Large-Scale AI in Telecom: Charting the Roadmap for Innovation, Scalability, and Enhanced Digital Experiences", a:"A. Shahid, A. Kliks, et al.", v:"arXiv preprint", y:2025, type:"preprint", arxiv:"2503.04184"},
-        {t:"Next-Generation Sustainable Wireless Systems: Energy Efficiency Meets Environmental Impact", a:"C. K. Thomas, O. Hashash, K. Ehsani, W. Saad", v:"arXiv preprint", y:2025, type:"preprint", arxiv:"2509.02395"},
+        {t:"Next-Generation Sustainable Wireless Systems: Energy Efficiency Meets Environmental Impact", a:"C. K. Thomas, O. Hashash, K. Ehsani, W. Saad", v:"IEEE GLOBECOM", y:2025, type:"conference", doi:"10.1109/GLOBECOM59602.2025.11432202", arxiv:"2509.02395"},
         {t:"Semantic Communication with Hopfield Memories", a:"K. Nasreddine, C. K. Thomas, W. Saad", v:"arXiv preprint", y:2025, type:"preprint", arxiv:"2511.10302"},
         {t:"Causal Model-Based Reinforcement Learning for Sample-Efficient IoT Channel Access", a:"A. Arun, C. K. Thomas, R. Sarvendranath, W. Saad", v:"arXiv preprint", y:2025, type:"preprint", arxiv:"2511.10291"},
         {t:"Flexible Semantic-Aware Resource Allocation: Serving More Users Through Similarity Range Constraints", a:"N. Gholami, N. Moghim, B. S. Ghahfarokhi, P. Salavati, C. K. Thomas, S. Shetty, et al.", v:"arXiv preprint", y:2025, type:"preprint", arxiv:"2504.20939"},
 
         // 2024
-        {t:"Large Multi-modal Models (LMMs) as Universal Foundation Models for AI-Native Wireless Systems", a:"S. Xu, C. K. Thomas, O. Hashash, N. Muralidhar, W. Saad, N. Ramakrishnan", v:"IEEE Network, 38(5), 10–20", y:2024, type:"journal"},
-        {t:"Neuro-Symbolic Causal Reasoning Meets Signaling Game for Emergent Semantic Communications", a:"C. K. Thomas, W. Saad", v:"IEEE Transactions on Wireless Communications, 23(5), 4546–4563", y:2024, type:"journal", arxiv:"2210.12040"},
-        {t:"Causal Reasoning: Charting a Revolutionary Course for Next-Generation AI-Native Wireless Networks", a:"C. K. Thomas, C. Chaccour, W. Saad, M. Debbah, C. S. Hong", v:"IEEE Vehicular Technology Magazine, 19(1), 16–31", y:2024, type:"journal", arxiv:"2309.13223"},
-        {t:"Quantum Semantic Communications for Resource-Efficient Quantum Networking", a:"M. Chehimi, C. Chaccour, C. K. Thomas, W. Saad", v:"IEEE Communications Letters, 28(4), 803–807", y:2024, type:"journal"},
-        {t:"Enhanced Spatial Modulation Based Orthogonal Time Frequency Space System", a:"A. Anoop, C. K. Thomas, S. Kala", v:"IEICE Transactions on Communications, 107(11), 785–796", y:2024, type:"journal"},
-        {t:"Reasoning with the Theory of Mind for Pragmatic Semantic Communication", a:"C. K. Thomas, E. C. Strinati, W. Saad", v:"IEEE Consumer Communications & Networking Conference (CCNC)", y:2024, type:"conference", arxiv:"2311.18224"},
-        {t:"Hypergame Theory for Decentralized Resource Allocation in Multi-user Semantic Communications", a:"C. K. Thomas, W. Saad", v:"IEEE Conference on Decision and Control (CDC)", y:2024, type:"conference", arxiv:"2409.17985"},
-        {t:"Symbolic Logic and Category Theory for Reasoning-Enabled Semantic Communications", a:"C. K. Thomas, W. Saad", v:"Asilomar Conference on Signals, Systems, and Computers", y:2024, type:"conference"},
+        {t:"Large Multi-modal Models (LMMs) as Universal Foundation Models for AI-Native Wireless Systems", a:"S. Xu, C. K. Thomas, O. Hashash, N. Muralidhar, W. Saad, N. Ramakrishnan", v:"IEEE Network, 38(5), 10–20", y:2024, type:"journal", doi:"10.1109/MNET.2024.3427313", arxiv:"2402.01748"},
+        {t:"Neuro-Symbolic Causal Reasoning Meets Signaling Game for Emergent Semantic Communications", a:"C. K. Thomas, W. Saad", v:"IEEE Transactions on Wireless Communications, 23(5), 4546–4563", y:2024, type:"journal", doi:"10.1109/TWC.2023.3319981", arxiv:"2210.12040"},
+        {t:"Causal Reasoning: Charting a Revolutionary Course for Next-Generation AI-Native Wireless Networks", a:"C. K. Thomas, C. Chaccour, W. Saad, M. Debbah, C. S. Hong", v:"IEEE Vehicular Technology Magazine, 19(1), 16–31", y:2024, type:"journal", doi:"10.1109/MVT.2024.3359357", arxiv:"2309.13223"},
+        {t:"Quantum Semantic Communications for Resource-Efficient Quantum Networking", a:"M. Chehimi, C. Chaccour, C. K. Thomas, W. Saad", v:"IEEE Communications Letters, 28(4), 803–807", y:2024, type:"journal", doi:"10.1109/LCOMM.2024.3361852"},
+        {t:"Enhanced Spatial Modulation Based Orthogonal Time Frequency Space System", a:"A. Anoop, C. K. Thomas, S. Kala", v:"IEICE Transactions on Communications, 107(11), 785–796", y:2024, type:"journal", doi:"10.23919/transcom.2023ebp3206"},
+        {t:"Reasoning with the Theory of Mind for Pragmatic Semantic Communication", a:"C. K. Thomas, E. C. Strinati, W. Saad", v:"IEEE Consumer Communications & Networking Conference (CCNC)", y:2024, type:"conference", doi:"10.1109/CCNC51664.2024.10454639", arxiv:"2311.18224"},
+        {t:"Hypergame Theory for Decentralized Resource Allocation in Multi-user Semantic Communications", a:"C. K. Thomas, W. Saad", v:"IEEE Conference on Decision and Control (CDC)", y:2024, type:"conference", doi:"10.1109/CDC56724.2024.10886627", arxiv:"2409.17985"},
+        {t:"Symbolic Logic and Category Theory for Reasoning-Enabled Semantic Communications", a:"C. K. Thomas, W. Saad", v:"Asilomar Conference on Signals, Systems, and Computers", y:2024, type:"conference", doi:"10.1109/IEEECONF60004.2024.10942788"},
         {t:"Generalized Dual-Mode Index Modulation Based on OTFS", a:"A. Anoop, C. K. Thomas, S. Kala", v:"IEEE International Conference on Electronics, Computing and Communication Technologies", y:2024, type:"conference"},
-        {t:"Multi Stage Kalman Filter (MSKF) Based Time-Varying Sparse Channel Estimation with Fast Convergence", a:"P. De, M. Juntti, C. K. Thomas", v:"IEEE Open Journal of Signal Processing", y:2024, type:"journal"},
 
         // 2023
-        {t:"Causal Semantic Communication for Digital Twins: A Generalizable Imitation Learning Approach", a:"C. K. Thomas, W. Saad, Y. Xiao", v:"IEEE Journal on Selected Areas in Information Theory, 4, 698–717", y:2023, type:"journal"},
-        {t:"Sensing Aided Channel Estimation in Wideband Millimeter-Wave MIMO Systems", a:"R. Mundlamuri, R. Gangula, C. K. Thomas, F. Kaltenberger, W. Saad", v:"IEEE ICC Workshops", y:2023, type:"conference"},
-        {t:"Reliable Beamforming at Terahertz Bands: Are Causal Representations the Way Forward?", a:"C. K. Thomas, W. Saad", v:"IEEE ICASSP", y:2023, type:"conference", arxiv:"2303.08017"},
-        {t:"Towards Convergent Approximate Message Passing by Alternating Constrained Minimization of Bethe Free Energy", a:"C. K. Thomas, Z. Zhao, D. Slock", v:"IEEE Information Theory Workshop (ITW)", y:2023, type:"conference"},
-        {t:"Alternating Constrained Minimization Based Approximate Message Passing", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2023, type:"conference"},
+        {t:"Causal Semantic Communication for Digital Twins: A Generalizable Imitation Learning Approach", a:"C. K. Thomas, W. Saad, Y. Xiao", v:"IEEE Journal on Selected Areas in Information Theory, 4, 698–717", y:2023, type:"journal", doi:"10.1109/JSAIT.2023.3336538", arxiv:"2304.12502"},
+        {t:"Mitigating Intra-Cell Pilot Contamination in Massive MIMO: A Rate Splitting Approach", a:"A. Mishra, Y. Mao, C. K. Thomas, L. Sanguinetti, B. Clerckx", v:"IEEE Transactions on Wireless Communications, 22(5), 3472–3487", y:2023, type:"journal", doi:"10.1109/TWC.2022.3218897", arxiv:"2206.07499"},
+        {t:"Sensing Aided Channel Estimation in Wideband Millimeter-Wave MIMO Systems", a:"R. Mundlamuri, R. Gangula, C. K. Thomas, F. Kaltenberger, W. Saad", v:"IEEE ICC Workshops", y:2023, type:"conference", doi:"10.1109/ICCWorkshops57953.2023.10283636", arxiv:"2302.02065"},
+        {t:"Reliable Beamforming at Terahertz Bands: Are Causal Representations the Way Forward?", a:"C. K. Thomas, W. Saad", v:"IEEE ICASSP", y:2023, type:"conference", doi:"10.1109/ICASSP49357.2023.10096153", arxiv:"2303.08017"},
+        {t:"Towards Convergent Approximate Message Passing by Alternating Constrained Minimization of Bethe Free Energy", a:"C. K. Thomas, Z. Zhao, D. Slock", v:"IEEE Information Theory Workshop (ITW)", y:2023, type:"conference", doi:"10.1109/ITW55543.2023.10161629"},
+        {t:"Alternating Constrained Minimization Based Approximate Message Passing", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2023, type:"conference", doi:"10.1109/ICASSP49357.2023.10094948"},
 
         // 2022
-        {t:"Mitigating Intra-Cell Pilot Contamination in Massive MIMO: A Rate Splitting Approach", a:"A. Mishra, Y. Mao, C. K. Thomas, L. Sanguinetti, B. Clerckx", v:"IEEE Transactions on Wireless Communications, 22(5), 3472–3487", y:2022, type:"journal"},
-        {t:"Practical Hybrid Beamforming for Millimeter Wave Massive MIMO Full Duplex with Limited Dynamic Range", a:"C. K. Sheemar, C. K. Thomas, D. Slock", v:"IEEE Open Journal of the Communications Society, 3, 127–143", y:2022, type:"journal"},
-        {t:"Neuro-Symbolic Artificial Intelligence (AI) for Intent Based Semantic Communication", a:"C. K. Thomas, W. Saad", v:"IEEE GLOBECOM", y:2022, type:"conference", arxiv:"2205.10768"},
+        {t:"Practical Hybrid Beamforming for Millimeter Wave Massive MIMO Full Duplex with Limited Dynamic Range", a:"C. K. Sheemar, C. K. Thomas, D. Slock", v:"IEEE Open Journal of the Communications Society, 3, 127–143", y:2022, type:"journal", doi:"10.1109/OJCOMS.2022.3140422", arxiv:"2104.11537"},
+        {t:"Multi Stage Kalman Filter (MSKF) Based Time-Varying Sparse Channel Estimation with Fast Convergence", a:"P. De, M. Juntti, C. K. Thomas", v:"IEEE Open Journal of Signal Processing", y:2022, type:"journal"},
+        {t:"Neuro-Symbolic Artificial Intelligence (AI) for Intent Based Semantic Communication", a:"C. K. Thomas, W. Saad", v:"IEEE GLOBECOM", y:2022, type:"conference", doi:"10.1109/GLOBECOM48099.2022.10001097", arxiv:"2205.10768"},
         {t:"Quantum Semantic Communications: An Unexplored Avenue for Contextual Networking", a:"M. Chehimi, C. Chaccour, C. K. Thomas, W. Saad", v:"arXiv preprint", y:2022, type:"preprint", arxiv:"2205.02422"},
 
         // 2021
         {t:"Site-Specific Millimeter-Wave Compressive Channel Estimation Algorithms with Hybrid MIMO Architectures", a:"S. S. Thoota, D. Garcia Marti, T. Demir, R. Mundlamuri, et al.", v:"ITU Journal on Future and Evolving Technologies, 2(4)", y:2021, type:"journal"},
-        {t:"Energy Efficient Sparse Bayesian Learning Using Learned Approximate Message Passing", a:"C. K. Thomas, R. Mundlamuri, C. R. Murthy, M. Kountouris", v:"IEEE SPAWC", y:2021, type:"conference"},
-        {t:"Generalized Swept Approximate Message Passing Based Kalman Filtering for Dynamic Sparse Bayesian Learning", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2021, type:"conference"},
+        {t:"Energy Efficient Sparse Bayesian Learning Using Learned Approximate Message Passing", a:"C. K. Thomas, R. Mundlamuri, C. R. Murthy, M. Kountouris", v:"IEEE SPAWC", y:2021, type:"conference", doi:"10.1109/SPAWC51858.2021.9593220"},
 
         // 2020
-        {t:"Posterior Variance Predictions in Sparse Bayesian Learning under Approximate Inference Techniques", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers (ACSSC)", y:2020, type:"conference"},
-        {t:"BP-VB-EP Based Static and Dynamic Sparse Bayesian Learning with Kronecker Structured Dictionaries", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2020, type:"conference"},
-        {t:"Rate Maximization under Partial CSIT for Multi-stage/Hybrid BF under Limited Dynamic Range for OFDM Full-Duplex Systems", a:"C. K. Thomas, D. Slock", v:"IEEE Vehicular Technology Conference (VTC2020-Spring)", y:2020, type:"conference"},
-        {t:"Massive MIMO Stochastic Geometry and Analysis of Beamforming with Partial CSIT", a:"C. K. Thomas, D. Slock", v:"6G Wireless Summit (6G SUMMIT)", y:2020, type:"conference"},
-        {t:"A Rate Splitting Strategy for Mitigating Intra-Cell Pilot Contamination in Massive MIMO", a:"C. K. Thomas, B. Clerckx, L. Sanguinetti, D. Slock", v:"arXiv preprint", y:2020, type:"preprint", arxiv:"2003.06478"},
+        {t:"Sparse Bayesian Learning, Beamforming Techniques and Asymptotic Analysis for Massive MIMO", a:"C. K. Thomas", v:"Ph.D. Thesis, Sorbonne Université / EURECOM", y:2020, type:"thesis", url:"https://theses.hal.science/tel-03140016"},
+        {t:"Posterior Variance Predictions in Sparse Bayesian Learning under Approximate Inference Techniques", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers (ACSSC)", y:2020, type:"conference", doi:"10.1109/IEEECONF51394.2020.9443473"},
+        {t:"BP-VB-EP Based Static and Dynamic Sparse Bayesian Learning with Kronecker Structured Dictionaries", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2020, type:"conference", doi:"10.1109/ICASSP40776.2020.9054517"},
+        {t:"Rate Maximization under Partial CSIT for Multi-stage/Hybrid BF under Limited Dynamic Range for OFDM Full-Duplex Systems", a:"C. K. Thomas, D. Slock", v:"IEEE Vehicular Technology Conference (VTC2020-Spring)", y:2020, type:"conference", doi:"10.1109/VTC2020-Spring48590.2020.9129185"},
+        {t:"Massive MIMO Stochastic Geometry and Analysis of Beamforming with Partial CSIT", a:"C. K. Thomas, D. Slock", v:"6G Wireless Summit (6G SUMMIT)", y:2020, type:"conference", doi:"10.1109/6GSUMMIT49458.2020.9083798"},
+        {t:"Generalized Swept Approximate Message Passing Based Kalman Filtering for Dynamic Sparse Bayesian Learning", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2020, type:"conference", doi:"10.23919/EUSIPCO47968.2020.9287708"},
+        {t:"A Rate Splitting Strategy for Mitigating Intra-Cell Pilot Contamination in Massive MIMO", a:"C. K. Thomas, B. Clerckx, L. Sanguinetti, D. Slock", v:"IEEE ICC Workshops", y:2020, type:"conference", doi:"10.1109/ICCWORKSHOPS49005.2020.9145128", arxiv:"2003.06478"},
 
         // 2019
-        {t:"Low Complexity Static and Dynamic Sparse Bayesian Learning Combining BP, VB and EP Message Passing", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2019, type:"conference"},
-        {t:"Multi-stage/Hybrid BF under Limited Dynamic Range for OFDM FD Backhaul with MIMO SI Nulling", a:"C. K. Thomas, C. K. Sheemar, D. Slock", v:"International Symposium on Wireless Communication Systems (ISWCS)", y:2019, type:"conference"},
+        {t:"Low Complexity Static and Dynamic Sparse Bayesian Learning Combining BP, VB and EP Message Passing", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2019, type:"conference", doi:"10.1109/IEEECONF44664.2019.9048860"},
+        {t:"Convergence Analysis of Sparse Bayesian Learning under Approximate Inference Techniques", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2019, type:"conference", doi:"10.1109/IEEECONF44664.2019.9048760"},
+        {t:"Weighted Sum Rate Maximization for Hybrid Beamforming Design in Multi-Cell Massive MIMO OFDM Systems", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2019, type:"conference", doi:"10.23919/EUSIPCO.2019.8902748"},
+        {t:"Space Alternating Variational Estimation and Kronecker Structured Dictionary Learning", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2019, type:"conference", doi:"10.1109/ICASSP.2019.8682928"},
+        {t:"Massive MISO IBC Reduced Order Zero Forcing Beamforming — A Multi-Antenna Stochastic Geometry Perspective", a:"C. K. Thomas, D. Slock", v:"International Conference on Computing, Networking and Communications (ICNC)", y:2019, type:"conference", doi:"10.1109/ICCNC.2019.8685602"},
+        {t:"Multi-stage/Hybrid BF under Limited Dynamic Range for OFDM FD Backhaul with MIMO SI Nulling", a:"C. K. Thomas, C. K. Sheemar, D. Slock", v:"International Symposium on Wireless Communication Systems (ISWCS)", y:2019, type:"conference", doi:"10.1109/ISWCS.2019.8877290"},
+        {t:"A Massive MIMO Stochastic Geometry Analysis of Various Beamforming Designs with Partial CSIT", a:"C. K. Thomas, D. Slock", v:"International Symposium on Modeling and Optimization in Mobile, Ad Hoc and Wireless Networks (WiOpt)", y:2019, type:"conference", url:"https://dl.ifip.org/db/conf/wiopt/wiopt2019/1570528831.pdf"},
         {t:"Gaussian Variational Bayes Kalman Filtering for Dynamic Sparse Bayesian Learning", a:"C. K. Thomas, D. Slock", v:"International Conference on Time Series and Forecasting", y:2019, type:"conference"},
-        {t:"Space Alternating Variational Estimation and Kronecker Structured Dictionary Learning", a:"C. K. Thomas, D. Slock", v:"IEEE ICASSP", y:2019, type:"conference"},
-        {t:"Convergence Analysis of Sparse Bayesian Learning under Approximate Inference Techniques", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2019, type:"conference"},
-        {t:"A Massive MIMO Stochastic Geometry Analysis of Various Beamforming Designs with Partial CSIT", a:"C. K. Thomas, D. Slock", v:"International Symposium on Modeling and Optimization in Mobile, Ad Hoc and Wireless Networks (WiOpt)", y:2019, type:"conference"},
-        {t:"Massive MISO IBC Reduced Order Zero Forcing Beamforming — A Multi-Antenna Stochastic Geometry Perspective", a:"C. K. Thomas, D. Slock", v:"International Conference on Computing, Networking and Communications (ICNC)", y:2019, type:"conference"},
-        {t:"Weighted Sum Rate Maximization for Hybrid Beamforming Design in Multi-Cell Massive MIMO OFDM Systems", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2019, type:"conference"},
 
         // 2018
-        {t:"SAVE — Space Alternating Variational Estimation for Sparse Bayesian Learning", a:"C. K. Thomas, D. Slock", v:"IEEE Data Science Workshop (DSW)", y:2018, type:"conference"},
-        {t:"Hybrid Beamforming Design in Multi-Cell MU-MIMO Systems with Per-RF or Per-Antenna Power Constraints", a:"C. K. Thomas, D. Slock", v:"IEEE Vehicular Technology Conference (VTC-Fall)", y:2018, type:"conference"},
-        {t:"Variational Bayesian Learning for Channel Estimation and Transceiver Determination", a:"C. K. Thomas, D. Slock", v:"Information Theory and Applications Workshop (ITA)", y:2018, type:"conference"},
-        {t:"Space Alternating Variational Bayesian Learning for LMMSE Filtering", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2018, type:"conference"},
-        {t:"Deterministic Annealing for Hybrid Beamforming Design in Multi-Cell MU-MIMO Systems", a:"C. K. Thomas, D. Slock", v:"IEEE SPAWC", y:2018, type:"conference"},
-        {t:"Reduced-Order Zero-Forcing Beamforming vs Optimal Beamforming and Dirty Paper Coding and Massive MIMO Analysis", a:"C. K. Thomas, D. Slock", v:"IEEE Sensor Array and Multichannel Signal Processing Workshop (SAM)", y:2018, type:"conference"},
-        {t:"Massive MISO IBC Beamforming — A Multi-Antenna Stochastic Geometry Perspective", a:"C. K. Thomas, D. Slock", v:"IEEE GLOBECOM Workshops", y:2018, type:"conference"},
-        {t:"SAVED — Space Alternating Variational Estimation for Sparse Bayesian Learning with Parametric Dictionaries", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2018, type:"conference"},
+        {t:"SAVE — Space Alternating Variational Estimation for Sparse Bayesian Learning", a:"C. K. Thomas, D. Slock", v:"IEEE Data Science Workshop (DSW)", y:2018, type:"conference", doi:"10.1109/DSW.2018.8439891"},
+        {t:"SAVED — Space Alternating Variational Estimation for Sparse Bayesian Learning with Parametric Dictionaries", a:"C. K. Thomas, D. Slock", v:"Asilomar Conference on Signals, Systems, and Computers", y:2018, type:"conference", doi:"10.1109/ACSSC.2018.8645208"},
+        {t:"Hybrid Beamforming Design in Multi-Cell MU-MIMO Systems with Per-RF or Per-Antenna Power Constraints", a:"C. K. Thomas, D. Slock", v:"IEEE Vehicular Technology Conference (VTC-Fall)", y:2018, type:"conference", doi:"10.1109/VTCFALL.2018.8690820"},
+        {t:"Variational Bayesian Learning for Channel Estimation and Transceiver Determination", a:"C. K. Thomas, D. Slock", v:"Information Theory and Applications Workshop (ITA)", y:2018, type:"conference", doi:"10.1109/ITA.2018.8503127"},
+        {t:"Space Alternating Variational Bayesian Learning for LMMSE Filtering", a:"C. K. Thomas, D. Slock", v:"European Signal Processing Conference (EUSIPCO)", y:2018, type:"conference", doi:"10.23919/EUSIPCO.2018.8553591"},
+        {t:"Deterministic Annealing for Hybrid Beamforming Design in Multi-Cell MU-MIMO Systems", a:"C. K. Thomas, D. Slock", v:"IEEE SPAWC", y:2018, type:"conference", doi:"10.1109/SPAWC.2018.8446010"},
+        {t:"Reduced-Order Zero-Forcing Beamforming vs Optimal Beamforming and Dirty Paper Coding and Massive MIMO Analysis", a:"C. K. Thomas, D. Slock", v:"IEEE Sensor Array and Multichannel Signal Processing Workshop (SAM)", y:2018, type:"conference", doi:"10.1109/SAM.2018.8448769"},
+        {t:"Massive MISO IBC Beamforming — A Multi-Antenna Stochastic Geometry Perspective", a:"C. K. Thomas, D. Slock", v:"IEEE GLOBECOM Workshops", y:2018, type:"conference", doi:"10.1109/GLOCOMW.2018.8644385"},
         {t:"Efficient Extension to Viterbi Decoder for TCM Encoded and Non-Linear Precoded Inputs", a:"P. B. M. Devarakonda, R. Strobel, C. K. Thomas", v:"US Patent 2018/0337750 A1", y:2018, type:"patent"},
 
         // 2017
-        {t:"Mixed Time Scale Weighted Sum Rate Maximization for Hybrid Beamforming in Multi-Cell MU-MIMO Systems", a:"C. K. Thomas, D. Slock", v:"IEEE GLOBECOM Workshops", y:2017, type:"conference"},
-        {t:"Noncoherent Multi-user MIMO Communications Using Covariance CSIT", a:"C. K. Thomas, W. Tabikh, D. Slock, Y. Yuan-Wu", v:"Asilomar Conference on Signals, Systems, and Computers (ACSSC)", y:2017, type:"conference"},
+        {t:"Mixed Time Scale Weighted Sum Rate Maximization for Hybrid Beamforming in Multi-Cell MU-MIMO Systems", a:"C. K. Thomas, D. Slock", v:"IEEE GLOBECOM Workshops", y:2017, type:"conference", doi:"10.1109/GLOCOMW.2017.8269180"},
+        {t:"Noncoherent Multi-user MIMO Communications Using Covariance CSIT", a:"C. K. Thomas, W. Tabikh, D. Slock, Y. Yuan-Wu", v:"Asilomar Conference on Signals, Systems, and Computers (ACSSC)", y:2017, type:"conference", doi:"10.1109/ACSSC.2017.8335551"},
 
         // 2012
         {t:"PIR-Based WSN for Outdoor Deployment", a:"A. Chattopadhyay, R. Upadrashta, A. Bhattacharya, T. Choubisa, C. K. Thomas, A. Krishna, et al.", v:"IEEE International Conference on Wireless Communications and Sensor Networks", y:2012, type:"conference"},
@@ -184,9 +186,21 @@
 
     const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    function pubLink(p) {
+    function primaryUrl(p) {
+        if (p.doi)   return "https://doi.org/" + p.doi;
+        if (p.url)   return p.url;
         if (p.arxiv) return "https://arxiv.org/abs/" + p.arxiv;
         return "https://scholar.google.com/scholar?q=" + encodeURIComponent(p.t);
+    }
+
+    // Returns the list of link "chips" shown under each entry.
+    function linkChips(p) {
+        const chips = [];
+        if (p.doi)   chips.push({href:"https://doi.org/" + p.doi,        icon:"external-link", label:"DOI"});
+        if (p.url)   chips.push({href:p.url,                              icon:"file-text",     label:"PDF"});
+        if (p.arxiv) chips.push({href:"https://arxiv.org/abs/" + p.arxiv, icon:"file-text",     label:"arXiv"});
+        if (!chips.length) chips.push({href:"https://scholar.google.com/scholar?q=" + encodeURIComponent(p.t), icon:"search", label:"Scholar"});
+        return chips;
     }
 
     function authorsHtml(a) {
@@ -194,7 +208,6 @@
     }
 
     function renderFilters() {
-        const matcher = FILTERS.find(f => f.key === activeFilter).match;
         const wrap = document.getElementById("pub-filters");
         wrap.innerHTML = FILTERS.map(f => {
             const n = PUBS.filter(f.match).length;
@@ -231,18 +244,18 @@
         results.innerHTML = years.map(year => {
             const items = list.filter(p => p.y === year).map(p => {
                 const tm = TYPE_META[p.type];
-                const link = pubLink(p);
-                const linkLabel = p.arxiv ? "arXiv" : "Scholar";
-                const linkIcon = p.arxiv ? "file-text" : "search";
+                const url = primaryUrl(p);
+                const chips = linkChips(p).map(c =>
+                    `<a class="pe-link" href="${c.href}" target="_blank" rel="noopener"><i data-lucide="${c.icon}"></i> ${c.label}</a>`
+                ).join("");
                 return `
                 <div class="pub-entry">
-                    <div class="pe-title"><a href="${link}" target="_blank" rel="noopener">${esc(p.t)}</a></div>
+                    <div class="pe-title"><a href="${url}" target="_blank" rel="noopener">${esc(p.t)}</a></div>
                     <div class="pe-authors">${authorsHtml(p.a)}</div>
                     <div class="pe-venue">${esc(p.v)}, ${p.y}</div>
                     <div class="pe-meta">
                         <span class="pe-badge ${tm.cls}">${tm.label}</span>
-                        ${p.arxiv ? `<span class="pe-badge badge-arxiv">arXiv:${p.arxiv}</span>` : ""}
-                        <a class="pe-link" href="${link}" target="_blank" rel="noopener"><i data-lucide="${linkIcon}"></i> ${linkLabel}</a>
+                        ${chips}
                     </div>
                 </div>`;
             }).join("");

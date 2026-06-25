@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talks | TRAIN Lab</title>
+    <meta name="description" content="TRAIN Lab at Worcester Polytechnic Institute">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="legacy.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="glow-bg glow-bg-2"></div>
+
+    <div id="navbar-placeholder"></div>
+
+    <main>
+        <div class="page-hero reveal">
+            <div class="wrap">
+                <div class="kicker">Outreach</div>
+                <h1>Talks &amp; Tutorials</h1>
+                <p class="sub">Invited talks, keynotes, tutorials, and seminars. Search or filter by type, browse by year.</p>
+            </div>
+        </div>
+
+        <section class="section reveal">
+            <div class="wrap">
+                <div class="pub-controls">
+                    <div class="pub-search">
+                        <i data-lucide="search"></i>
+                        <input type="text" id="talk-search-input" placeholder="Search by title, event, or location…" autocomplete="off">
+                    </div>
+                    <div class="pub-filters" id="talk-filters"></div>
+                </div>
+                <div class="pub-count" id="talk-count"></div>
+                <div id="talk-results"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+    // Talks & tutorials, newest first. Sourced from CV.
+    // type: invited | tutorial | seminar | talk
+    const TALKS = [
+        // 2026
+        {t:"Reasoning-Driven Semantic Communication for AI-Native Networks", ev:"Tutorial — IEEE Vehicular Technology Conference (VTC Fall)", loc:"Boston, MA, USA", d:"Sep 6, 2026", y:2026, type:"tutorial"},
+        {t:"Future Networks Lasting Impact: Engineering Environmental Responsibility", ev:"IEEE Future Networks (online webinar, global)", loc:"Virtual", d:"Apr 22, 2026", y:2026, type:"seminar"},
+        {t:"What If Networks Could Understand What They Are Sending? Semantic Communication for Smarter 6G", ev:"Dept. of Electrical & Computer Engineering, University of Massachusetts Dartmouth", loc:"Dartmouth, MA, USA", d:"Apr 3, 2026", y:2026, type:"seminar"},
+
+        // 2025
+        {t:"Emergent Intelligence in Wireless: When Networks Learn to Reason About Themselves", ev:"Brown bag lecture — Qualcomm, New England Office", loc:"Boxborough, MA, USA", d:"Dec 8, 2025", y:2025, type:"seminar"},
+        {t:"What If Networks Could Understand What They Are Sending? Semantic Communication for Smarter 6G", ev:"Dept. of Electrical & Computer Engineering, University of Connecticut", loc:"CT, USA", d:"Oct 17, 2025", y:2025, type:"seminar"},
+
+        // 2024
+        {t:"Artificial General Intelligence (AGI)-Native Wireless Networks: Challenges and Opportunities", ev:"Tutorial (with W. Saad & O. Hashash) — IEEE GLOBECOM", loc:"Cape Town, South Africa", d:"Dec 2024", y:2024, type:"tutorial"},
+        {t:"What Unites AI, 6G, and Common Sense in Shaping Our Future?", ev:"DMV Tech Nexus: Cyber & AI Salon, DC Startup and Tech Week", loc:"Washington, DC, USA", d:"Oct 2024", y:2024, type:"invited"},
+        {t:"Next-Generation AI for Next-Generation Wireless Networks", ev:"Joint Event with Stevens Institute of Technology & IEEE TCCN SIG Rising Star Symposium Series", loc:"NJ, USA", d:"Aug 2024", y:2024, type:"invited"},
+        {t:"Variational Inference, (Not So) Approximate Bayesian Techniques, and Applications", ev:"Tutorial (with D. Slock) — IEEE ICASSP", loc:"", d:"Apr 2024", y:2024, type:"tutorial"},
+        {t:"Large Multi-Modal Models as Universal Foundation Models for AI-Native Wireless Systems", ev:"IEEE Future Networks Forum (virtual)", loc:"Virtual", d:"Mar 2024", y:2024, type:"invited"},
+
+        // 2023
+        {t:"Causal Reasoning for Wireless Networks", ev:"Institute for Communication & Information Systems, University of Surrey (virtual)", loc:"UK", d:"Dec 2023", y:2023, type:"invited"},
+        {t:"Causal Reasoning: Charting a Revolutionary Course for Next-Generation AI-Native Wireless Networks", ev:"Ericsson Research (virtual, worldwide)", loc:"Virtual", d:"Nov 2023", y:2023, type:"invited"},
+        {t:"Causal Reasoning and Neurosymbolic AI Based Semantic Communications", ev:"Nokia Bell Labs (virtual)", loc:"France", d:"Oct 2023", y:2023, type:"invited"},
+        {t:"Reasoning Foundations for Semantic Communications", ev:"WIoT, Northeastern University", loc:"Boston, MA, USA", d:"Oct 2023", y:2023, type:"invited"},
+        {t:"Variational Inference, (Not So) Approximate Bayesian Techniques, and Applications", ev:"Tutorial (with D. Slock) — IEEE EUSIPCO", loc:"", d:"Sep 2023", y:2023, type:"tutorial"},
+        {t:"Semantic Communications", ev:"CEA-LETI", loc:"Grenoble, France", d:"Aug 2023", y:2023, type:"invited"},
+        {t:"Semantic Communications", ev:"IEEE 29th National Conference on Communications (NCC)", loc:"Guwahati, India", d:"Jan 2023", y:2023, type:"invited"},
+
+        // 2020
+        {t:"Approximate Inference Based Static and Dynamic Sparse Bayesian Learning with Kronecker Structured Dictionaries", ev:"GdR ISIS Virtual Conference on Tensor Decompositions", loc:"Virtual, France", d:"May 27, 2020", y:2020, type:"talk"},
+
+        // 2016
+        {t:"Signal Processing and Communication: Bridging the Gap Between Theory and Practice", ev:"IEEE Innotech Talk — AWH Engineering College", loc:"Calicut, Kerala, India", d:"Nov 2016", y:2016, type:"talk"}
+    ];
+
+    const TYPE_META = {
+        invited:  {label:"Invited Talk", cls:"badge-journal"},
+        tutorial: {label:"Tutorial",     cls:"badge-book"},
+        seminar:  {label:"Seminar",      cls:"badge-conf"},
+        talk:     {label:"Talk",         cls:"badge-other"}
+    };
+
+    const FILTERS = [
+        {key:"all",      label:"All",          match:() => true},
+        {key:"invited",  label:"Invited Talks", match:t => t.type === "invited"},
+        {key:"tutorial", label:"Tutorials",     match:t => t.type === "tutorial"},
+        {key:"seminar",  label:"Seminars",      match:t => t.type === "seminar"},
+        {key:"talk",     label:"Other",         match:t => t.type === "talk"}
+    ];
+
+    let activeFilter = "all";
+    let searchQuery = "";
+
+    const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    function renderFilters() {
+        const wrap = document.getElementById("talk-filters");
+        wrap.innerHTML = FILTERS.map(f => {
+            const n = TALKS.filter(f.match).length;
+            return `<button class="filter-btn${f.key === activeFilter ? " active" : ""}" data-filter="${f.key}">${f.label} <span style="opacity:.6">(${n})</span></button>`;
+        }).join("");
+        wrap.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                activeFilter = btn.dataset.filter;
+                renderFilters();
+                renderResults();
+            });
+        });
+    }
+
+    function renderResults() {
+        const matcher = FILTERS.find(f => f.key === activeFilter).match;
+        const q = searchQuery.trim().toLowerCase();
+        const list = TALKS.filter(t => {
+            if (!matcher(t)) return false;
+            if (!q) return true;
+            return (t.t + " " + t.ev + " " + t.loc).toLowerCase().includes(q);
+        });
+
+        document.getElementById("talk-count").textContent =
+            list.length + (list.length === 1 ? " talk" : " talks");
+
+        const results = document.getElementById("talk-results");
+        if (!list.length) {
+            results.innerHTML = `<div class="no-results">No talks match your search.</div>`;
+            return;
+        }
+
+        const years = [...new Set(list.map(t => t.y))].sort((a, b) => b - a);
+        results.innerHTML = years.map(year => {
+            const items = list.filter(t => t.y === year).map(t => {
+                const tm = TYPE_META[t.type];
+                const venueLine = t.loc ? `${esc(t.loc)} &middot; ${esc(t.d)}` : esc(t.d);
+                return `
+                <div class="pub-entry">
+                    <div class="pe-title">${esc(t.t)}</div>
+                    <div class="pe-authors">${esc(t.ev)}</div>
+                    <div class="pe-venue">${venueLine}</div>
+                    <div class="pe-meta">
+                        <span class="pe-badge ${tm.cls}">${tm.label}</span>
+                    </div>
+                </div>`;
+            }).join("");
+            return `<div class="year-group"><h2 class="year-heading"><span class="year-num">${year}</span></h2>${items}</div>`;
+        }).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        renderFilters();
+        renderResults();
+        const input = document.getElementById("talk-search-input");
+        input.addEventListener("input", e => {
+            searchQuery = e.target.value;
+            renderResults();
+        });
+        if (window.lucide) lucide.createIcons();
+    });
+    </script>
+
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

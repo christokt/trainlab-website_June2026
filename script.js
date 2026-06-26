@@ -2,13 +2,6 @@
 lucide.createIcons();
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Freeze the hero globe animation for users who prefer reduced motion
-    const heroGlobe = document.querySelector('.hero-globe svg');
-    if (heroGlobe && heroGlobe.pauseAnimations &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        heroGlobe.pauseAnimations();
-    }
-
     // Reveal animations on scroll
     const reveals = document.querySelectorAll('.reveal');
 

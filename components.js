@@ -32,7 +32,7 @@ const footerHtml = `
             <span style="font-weight: 800; color: var(--text-primary); font-size: 1.25rem; letter-spacing: 1px;">TR<span style="color: var(--accent-cyan);">AI</span>N LAB</span>
         </a>
             <p style="margin-top: 10px;">Trustworthy and Resilient AI and Networks Lab</p>
-            <p class="footer-address">Worcester Polytechnic Institute (WPI)<br>Worcester, MA 01609</p>
+            <p class="footer-address">Worcester Polytechnic Institute (WPI)<br>Atwater Kent (AK) 317B<br>Worcester, MA 01609</p>
         </div>
         <div class="footer-links">
             <h3>Quick Links</h3>

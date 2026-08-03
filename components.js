@@ -2,9 +2,9 @@
 const navbarHtml = `
 <nav class="navbar glass-effect">
     <div class="wrap nav-container">
-        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img src="assets/logo_mark.png" alt="TRAIN Lab Logo" style="height: 45px;">
-            <span style="font-weight: 800; color: var(--text-primary); font-size: 1.25rem; letter-spacing: 1px;">TR<span style="color: var(--accent-cyan);">AI</span>N LAB</span>
+        <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 2px; text-decoration: none;">
+            <img src="assets/logo_mark_T_clean.png" alt="TRAIN Lab Logo" style="height: 40px;">
+            <span style="font-weight: 800; color: var(--text-primary); font-size: 1.25rem; letter-spacing: 1px;">R<span style="color: var(--accent-cyan);">AI</span>N LAB</span>
         </a>
         <ul class="nav-links">
             <li><a href="research.html">Research</a></li>
@@ -27,9 +27,9 @@ const footerHtml = `
 <footer class="footer">
     <div class="wrap footer-container">
         <div class="footer-brand">
-            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-            <img src="assets/logo_mark.png" alt="TRAIN Lab Logo" style="height: 45px;">
-            <span style="font-weight: 800; color: var(--text-primary); font-size: 1.25rem; letter-spacing: 1px;">TR<span style="color: var(--accent-cyan);">AI</span>N LAB</span>
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 2px; text-decoration: none;">
+            <img src="assets/logo_mark_T_clean.png" alt="TRAIN Lab Logo" style="height: 40px;">
+            <span style="font-weight: 800; color: var(--text-primary); font-size: 1.25rem; letter-spacing: 1px;">R<span style="color: var(--accent-cyan);">AI</span>N LAB</span>
         </a>
             <p style="margin-top: 10px;">Trustworthy and Resilient AI and Networks Lab</p>
             <p class="footer-address">Worcester Polytechnic Institute (WPI)<br>Atwater Kent (AK) 317B<br>Worcester, MA 01609</p>
